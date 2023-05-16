@@ -1,0 +1,144 @@
+PROBLEM STATEMENT:
+Make a program that asks the user for a number between 1 and 100. 
+The program then needs to generate a number also within that range.
+The program will compare the two numbers to see which is highest.
+The winner will get a 'point'. First to 3 points wins.
+
+NOUNS: usrNbr, comNbr, usrWins, comWins, gameOver
+
+VERBS: prompt, alert, while, output
+
+
+INPUTS:
+    usrNbr, comNbr
+
+PROCESSING: 
+    prompt usrNbr
+    randomize comNbr
+    compare numbers
+    assign winner
+    display output 
+
+OUTPUTS:   
+    Round 1 results
+    round 2 results
+    round 3 results
+    round ... results
+    final winner
+
+
+PSEUDOCODE:
+HigherThanNumberGame {
+
+    create usrNbr
+    create comNbr
+    create usrWins as number
+    create comWins as number
+    create gameover as bool
+
+    create function pickingNumber
+        while true 
+            prompt for usrNbr with 'Pick number between 1-100 or 'quit'
+
+            if usrNbr is 'exit'
+                display notice of exit
+                set gameover to true 
+
+            if usrNbr is not between 1 and 100
+                inform of invalidation
+            else 
+                break while
+            end if
+        end while
+    finish function 
+
+    create function DoingCalculations 
+        while gameover is false
+            run pickingNumber function
+            if gameOver is true
+                break while
+            end if 
+
+            change comNbr to Math.random() * 100 
+            // Add round function?
+            display 'You entered: [usrNbr] <br>The computer rolled [comNbr]<br><br>
+
+            if usrNbr is greater than comNbr
+                write 'you win the round'
+                usrWins++
+            else if usrNbr is less than comNbr
+                write 'you lost the round'
+                comWins++
+            else 
+                write 'tie'
+            end if 
+
+            if usrWins is 3
+                write 'you win'
+                change gameOver to true
+                break while
+            if comWins === 3 
+                write 'you lose' 
+                change gameOver to true 
+                beak while
+            end if 
+        end while
+    end function 
+
+    if usrNbr is exit
+        clear document //(how?)
+    end if 
+
+    call DoingCalculations function 
+end function 
+
+call HigherThanNumberGame function 
+
+
+Given the nature of the program, 
+I don't know if having specific test inputs will do much good.
+I will however do inputs that might cause bugs in program flow
+
+test case 1:
+
+    inputs: 
+        1, 3, 5, 7, 9, 100, -4, -20, 1000, 101, exit
+    
+    expected result:
+
+        You entered ...
+        The computer rolled
+        You lost/win/tie the round
+    
+        REPEAT X TIMES
+
+        Game over! You won/lost three rounds!
+    
+    actual result:
+
+        You entered: 1
+        The computer rolled: 48
+        You lost the round, sorry.
+
+        You entered: 3
+        The computer rolled: 94
+        You lost the round, sorry.
+
+        You entered: 5
+        The computer rolled: 62
+        You lost the round, sorry.
+
+        Game over. Sorry, the computer won 3 rounds.
+
+test case 2:
+
+    inputs: 
+        exit
+    
+    expected result:
+        [alert] quitting program
+        program exited
+
+    actual result:
+        [alert] Chickening out? Weak.
+        Shame on you.
